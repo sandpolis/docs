@@ -11,5 +11,5 @@ Sandpolis is able to get its location information from several sources. The serv
 
 | Service    | Additional |
 |------------|------------|
-| [ip-api.com](https://ip-api.com) | `ip-api.com` |
-| [tools.keycdn.com](https://tools.keycdn.com/geo) | `keycdn.com` |
+| <a href="https://ip-api.com" target="_blank">ip-api.com</a> | `ip-api.com` |
+| <a href="https://tools.keycdn.com/geo" target="_blank">tools.keycdn.com</a> | `keycdn.com` |
