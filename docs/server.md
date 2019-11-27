@@ -1,21 +1,23 @@
 # The Server
 
 ## Geolocation Services
-Sandpolis is able to get its location information from several sources. The server can only use one service at a time. To choose a service, set the following system properties:
+Sandpolis is able to get its location information from several sources, but the server can only use one service at a time. To choose a service, set the following system properties:
 
-| Property   | Description |
-|------------|-------------|
-| server.geolocation.service | The name of the geolocation service to use. Valid values are found in the table below. Defaults to `ip-api.com`. |
-| server.geolocation.key | The API key to use |
-| server.geolocation.expiration | The cache timeout in hours. Default is `240`. |
+| Property   | Default | Description |
+|------------|---------|---|
+| server.geolocation.service | `ip-api.com` | The name of the geolocation service to use. Valid values are found in the table below. |
+| server.geolocation.key | `null` | The service API key |
+| server.geolocation.expiration | `240` | The cache timeout in hours |
 
-| Service    | Additional |
+Sandpolis supports the following public geolocation services:
+
+| Service    | Identifier |
 |------------|------------|
 | <a href="https://ip-api.com" target="_blank">ip-api.com</a> | `ip-api.com` |
 | <a href="https://tools.keycdn.com/geo" target="_blank">tools.keycdn.com</a> | `keycdn.com` |
 
 ## Permissions
-Since multiple viewers can connect to a particular server at the same time, it's nice to have a robust permissions system. In most cases, a single admin viewer is sufficient for managing Sandpolis. Some advanced use cases require multiple users, which are feasible thanks to the permissions system. 
+Since multiple viewers can connect to a particular server at the same time, it's nice to have a permissions system to restrict a user's power. In most cases, a single admin viewer is sufficient for managing Sandpolis. Some advanced use cases require multiple users, which are feasible thanks to the permissions system. 
 
 The user permissions system is similar to the MySQL permissions system. Permissions are "granted" to users by the admin upon user creation. These permissions dictate what a user can do on the server. New users have no permissions by default and therefore can do essentially nothing on the server.
 
