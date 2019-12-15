@@ -74,3 +74,14 @@ The viewer-installer makes additional platform specific changes upon installatio
 ###### 3.2.1 Windows
 ###### 3.2.2 Linux
 ###### 3.2.3 Mac OS
+
+## Installer Flags
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| path     | user.home + /.sandpolis | The base installation path |
+| components | null  | The components to install |
+| version  | latest  | The version to install |
+| ext.linux.desktop | /usr/share/applications; user.home + /.local/share/applications | The Linux desktop entry location |
+| ext.windows.start | C:/ProgramData/Microsoft/Windows/Start Menu/Programs; user.home + /AppData/Microsoft/Windows/Start Menu/Programs | The Windows start menu location |
+| ext.windows.desktop | user.home + /Desktop | The Windows desktop shortcut location |
