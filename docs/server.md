@@ -1,13 +1,16 @@
 # The Server
 
+## Server Port
+The official port for the Sandpolis server is **8768**.
+
 ## Geolocation Services
 Sandpolis is able to get its location information from several sources, but the server can only use one service at a time. To choose a service, set the following system properties:
 
 | Property   | Default | Description |
 |------------|---------|---|
-| server.geolocation.service | `ip-api.com` | The name of the geolocation service to use. Valid values are found in the table below. |
-| server.geolocation.key | `null` | The service API key |
-| server.geolocation.expiration | `240` | The cache timeout in hours |
+| `server.geolocation.service` | *ip-api.com* | The name of the geolocation service to use. Valid values are found in the table below. |
+| `server.geolocation.key` | *null* | The service API key |
+| `server.geolocation.expiration` | *240* | The cache timeout in hours |
 
 Sandpolis supports the following public geolocation services:
 
@@ -25,21 +28,21 @@ The user permissions system is similar to the MySQL permissions system. Permissi
 
 | Permission | Description |
 |------------|-------------|
-| server.generate | Rights to use the generator |
-| server.fs.read | Read access to the server's filesystem |
-| server.fs.write | Write access to the server's filesystem |
-| server.users.view | Right to view usernames and permissions of all other users |
-| server.users.create | Right to create new users (of lesser or equal permissions) |
-| server.state.stop | Right to stop the server |
-| server.state.shutdown | Right to shutdown the server |
-| server.state.restart | Right to restart the server |
-| server.net.view | Right to open the network control panel |
-| server.net.create_listener | Right to create a new listener on the server |
-| server.auth.create_group | Right to create a new authentication group on the server |
-| client.fs.read | Read access to the client's filesystem |
-| client.fs.write | Write access to the client's filesystem |
-| client.state.shutdown | Right to shutdown the client |
-| client.state.restart | Right to restart the client |
+| `server.generate` | Rights to use the generator |
+| `server.fs.read` | Read access to the server's filesystem |
+| `server.fs.write` | Write access to the server's filesystem |
+| `server.users.view` | Right to view usernames and permissions of all other users |
+| `server.users.create` | Right to create new users (of lesser or equal permissions) |
+| `server.state.stop` | Right to stop the server |
+| `server.state.shutdown` | Right to shutdown the server |
+| `server.state.restart` | Right to restart the server |
+| `server.net.view` | Right to open the network control panel |
+| `server.net.create_listener` | Right to create a new listener on the server |
+| `server.auth.create_group` | Right to create a new authentication group on the server |
+| `client.fs.read` | Read access to the client's filesystem |
+| `client.fs.write` | Write access to the client's filesystem |
+| `client.state.shutdown` | Right to shutdown the client |
+| `client.state.restart` | Right to restart the client |
 
 ## Authentication Groups
 Authentication groups solve two problems:
@@ -86,7 +89,7 @@ Downloaders are similar to installers except dependencies must be downloaded upo
 - Windows portable executables (.exe, .msi)
 - Scripts (.sh, .rb, .py, .bat, ...)
 	
-#### 1.3 Tokens
+#### Tokens
 A token is an artifact which only contains the client configuration and cannot be executed by itself. When provided to a generic installer, the token allows the client to be installed on the remote system.
 
 ##### Advantages

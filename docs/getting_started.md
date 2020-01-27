@@ -25,9 +25,12 @@ cd sandpolis
 makepkg -sif
 ```
 
-Start and optionally enable the server's `systemd` unit:
+Start and optionally enable the server's `systemd` service unit:
 ``` sh
+# Start the server process
 sudo systemctl start sandpolisd.service
+
+# Configure the server to start on boot
 sudo systemctl enable sandpolisd.service
 ```
 
