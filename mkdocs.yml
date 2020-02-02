@@ -1,6 +1,10 @@
-site_name: Sandpolis 5.1.2
+site_name: Sandpolis Documentation
 nav:
   - Home: index.md
   - Getting Started: getting_started.md
   - The Server: server.md
+  - Desktop Viewer: viewer/gui.md
+  - Terminal Viewer: viewer/terminal.md
 theme: readthedocs
+markdown_extensions:
+  - admonition

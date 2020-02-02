@@ -1,5 +1,3 @@
-# The Server
-
 ## Server Port
 The official port for the Sandpolis server is **8768**.
 
@@ -12,7 +10,7 @@ Sandpolis is able to get its location information from several sources, but the 
 | `server.geolocation.key` | *null* | The service API key |
 | `server.geolocation.expiration` | *240* | The cache timeout in hours |
 
-Sandpolis supports the following public geolocation services:
+The following public geolocation services are supported:
 
 | Service    | Identifier |
 |------------|------------|

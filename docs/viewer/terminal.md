@@ -5,8 +5,6 @@ Sandpolis comes with a minimalist text interface compatible with most ANSI-compl
 ### Starting a Listener
 ### Generating an Installer
 ###### Address
-This is the IP or DNS name that the client will 
-
 ###### Port
 ###### Timeout
 ###### Path
