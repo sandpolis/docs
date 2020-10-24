@@ -1,10 +1,16 @@
 site_name: Sandpolis Documentation
 nav:
   - Home: index.md
-  - Getting Started: getting_started.md
-  - The Server: server.md
-  - Desktop Viewer: viewer/gui.md
-  - Terminal Viewer: viewer/terminal.md
+  - Tutorials:
+    - Getting Started: tutorials/getting_started.md
+    - Desktop client: tutorials/client/gui.md
+    - Terminal client: tutorials/client/terminal.md
+  - Programming Reference:
+    - Client: application/client.md
+    - Server: application/server.md
+    - Agent: application/agent.md
+    - Data Model: application/data_model.md
+    - Networking: application/network.md
 theme: readthedocs
 markdown_extensions:
   - admonition

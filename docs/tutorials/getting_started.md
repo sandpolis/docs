@@ -1,4 +1,6 @@
 ## Installing the Server
+The first thing you need to run Sandpolis is the server.
+
 There are several different ways to install the server. The universal installer will work on just about every system, but a specialized distribution package may be a more convenient option if your system supports it.
 
 ### With the universal installer GUI
@@ -48,28 +50,28 @@ If your container isn't starting on boot, ensure the Docker daemon is configured
 sudo systemctl enable docker
 ```
 
-## Installing the Viewer
-There are several official viewer applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the variant that meets your needs.
+## Installing a Client
+There are several official client applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the variant that meets your needs.
 
 ### Sandpolis for iOS
 The Sandpolis iOS application can be installed from the App Store and supports iPhone and iPad devices running iOS 13.0 or greater.
 
 !!! warning
-	The iOS app optionally uses Google's [Firebase platform](https://firebase.google.com) for user authentication. If you avoid Google products, just login to your servers manually without creating an account.
+	The iOS app optionally uses Google's [Firebase platform](https://firebase.google.com) for user authentication. If you want to avoid Google's tracking, just login to your servers manually without creating an account.
 
 #### Create an account
-Your account allows you to save multiple servers for easy access and enables several features not possible with other viewer applications.
+Your account allows you to save multiple servers for easy access and enables several features not possible with other client applications.
 
 ### Sandpolis Android application
 Coming soon...
 
-### Sandpolis Desktop Viewer
+### Sandpolis Desktop Client
 Coming soon...
 
-## Installing the Client
+## Installing the Agent
 
 ### With the universal installer GUI
-If you have the mobile application, you can scan the QR code in the universal installer to automatically associate the client with the correct server.
+If you have the mobile application, you can scan the QR code in the universal installer to automatically associate the agent with the correct server.
 
-### Generate a client installer
-The desktop viewer can generate customized installers that can be used to install the client on any machine.
+### Generate an agent installer
+The desktop client can generate customized installers that can be used to install the agent on any machine.

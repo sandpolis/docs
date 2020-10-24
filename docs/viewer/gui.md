@@ -1,2 +1,0 @@
-## Sandpolis Desktop Interface
-

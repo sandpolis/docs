@@ -18,7 +18,7 @@ The following public geolocation services are supported:
 | <a href="https://tools.keycdn.com/geo" target="_blank">tools.keycdn.com</a> | `keycdn.com` |
 
 ## Permissions
-Since multiple viewers can connect to a particular server at the same time, it's nice to have a permissions system to restrict a user's power. In most cases, a single admin viewer is sufficient for managing Sandpolis. Some advanced use cases require multiple users, which are feasible thanks to the permissions system. 
+Since multiple clients can connect to a particular server at the same time, it's nice to have a permissions system to restrict a user's power. In most cases, a single admin client is sufficient for managing Sandpolis. Some advanced use cases require multiple users, which are feasible thanks to the permissions system. 
 
 The user permissions system is similar to the MySQL permissions system. Permissions are "granted" to users by the admin upon user creation. These permissions dictate what a user can do on the server. New users have no permissions by default and therefore can do essentially nothing on the server.
 
@@ -100,10 +100,36 @@ A token is an artifact which only contains the client configuration and cannot b
 - Barcodes for use on Android, IOS, etc...
 
 ### Generators
-All installation artifacts are first generated on the server using a generator and then transferred to the requesting viewer (or client in the case of an automated upgrade). 
+All installation artifacts are first generated on the server using a generator and then transferred to the requesting client (or client in the case of an automated upgrade). 
 
 ##### Generator Queue
 Since performing a generation is an infrequent task, the server maintains a simple queue of requests (generation configs) and fufills them serially. If the queue becomes full, incoming requests are dropped.
 
 ##### Generator Configs
-A `GenConfig` specifies what type of generator should process it, any necessary options for that generator, and where to direct the resulting installation artifact. `GenConfigs` are implicitly created on the viewer from the graphical interface.
+A `GenConfig` specifies what type of generator should process it, any necessary options for that generator, and where to direct the resulting installation artifact. `GenConfigs` are implicitly created on the client from the graphical interface.
+
+## 2 Server
+Server installations are entirely contained in a single directory called the base directory. This base directory may not coincide with the base directory of an agent or client installation.
+
+###### 2.1 Filesystem Structure
+- `/base/server.jar` The server executable.
+- `/base/server.db` The server's only database.
+- `/base/lib` A directory for extracted libraries, regardless of instance prerequisites.
+	- `jar` Contains platform-independent Java libraries.
+	- `win` Contains Windows-specific native libraries.
+	- `lin` Contains Linux-specific native libraries.
+	- `osx` Contains OSX-specific native libraries.
+	- `bsd` Contains BSD-specific native libraries.
+	- `sol` Contains Solaris-specific native libraries.
+- `/base/tmp` A secondary temporary directory.
+
+###### 2.2 Additional Changes
+The server-installer makes additional platform specific changes upon installation:
+
+###### 2.2.1 Windows
+TODO: Research services
+###### 2.2.2 Linux
+###### 2.2.2.1 Systemd
+Management via systemd is supported.
+
+###### 2.2.3 Mac OS
