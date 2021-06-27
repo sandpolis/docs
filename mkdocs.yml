@@ -7,6 +7,9 @@ nav:
     - Using the terminal client: tutorials/client/terminal.md
   - Specification:
     - Agent: specification/agent.md
+    - Device Plugin: specification/plugin/device.md
+    - Filesystem Plugin: specification/plugin/filesystem.md
+    - Snapshot Plugin: specification/plugin/snapshot.md
   - Implementation Reference:
     - Client: application/client.md
     - Server: application/server.md

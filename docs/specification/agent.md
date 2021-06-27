@@ -1,5 +1,5 @@
 # Agent Instance
-At the highest level, agents are responsible for carrying out tasks for remote
+At a general level, agents are responsible for carrying out tasks for remote
 users. They can connect over the network to any other type of instance. At minimum,
 agents must be associated with one server.
 
@@ -16,19 +16,39 @@ or configured by the user at runtime.
 | `server.address` | A CSV of IP addresses or domain names including port information |
 | `server.timeout` | The server connection timeout in milliseconds |
 | `server.strict_certs` | The agent will refuse to connect to a server that presents an invalid certificate |
+| `agent.polling.interval` | The connection poll interval in milliseconds |
 
-## Agent Types
+## Connection Modes
+There are two connection modes that have an impact on performance and latency.
 
-### Independent Agent
-### Subagent
-Subagents are devices that do not have an independent agent installed, but are
-instead managed via a third-party protocol such as SSH, HTTP, or SNMP. The gateway
-for a subagent may be an independent agent or a server.
+### Continuous
+In continuous mode, the agent maintains its primary connection at all times.
+If the connection is lost, the agent will periodically attempt to reestablish the
+connection using the same parameters it used to establish the initial connection.
 
-#### Communicators
-##### SSH
-##### HTTP
-##### SNMP
+The connection mode can be changed on-the-fly by a user or scheduled to change
+automatically according to the time and day.
+
+### Polling
+In polling mode, the agent intentionally closes the primary connection unless there
+exists an active stream. On a configurable schedule, the agent reconnects to a
+server, flushes any cached data, and checks for any new work items. After executing
+all available work items, the primary connection is closed again.
+
+The agent may attempt a spontaneous connection outside of the regular schedule if
+an internal agent process triggers it.
+
+## Plugins
+Agents can optionally support plugins to enhance functionality beyond the standard
+feature set. Upon initial connection, the agent provides a list of plugin versions
+that it has loaded. The server responds with a list of plugin archives that the
+agent should install.
+
+## Standard Feature Set
+The standard feature set is the minimum amount of functionality an agent implementation
+must provide.
+
+### AgentMetadata
 
 ## Upgrades
 There are two ways to upgrade the agent:
