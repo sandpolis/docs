@@ -1,6 +1,6 @@
 # Server/Agent Messages
 
-## Agent Authentication
+## Agent Authentication Messages
 ### RQ_NoAuth
 
 ```java
@@ -36,7 +36,7 @@
 // Response:     Outcome
 ```
 
-## General
+## General Messages
 ### RQ_AgentMetadata
 
 ```java
