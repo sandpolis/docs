@@ -6,6 +6,7 @@ nav:
     - Using the desktop client: tutorials/client/gui.md
     - Using the terminal client: tutorials/client/terminal.md
   - Specification:
+    - Instance: specification/instance.md
     - Agent: specification/agent.md
     - Server: specification/server.md
     - Client/Server: specification/clientserver.md
@@ -18,7 +19,6 @@ nav:
     - Client: application/client.md
     - Server: application/server.md
     - Agent: application/agent.md
-    - Data Model: application/data_model.md
     - Networking: application/network.md
 theme: readthedocs
 markdown_extensions:
