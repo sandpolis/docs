@@ -1,16 +1,39 @@
-## Installing the Server
-The first thing you need to run Sandpolis is the server.
+# Getting Started
+If you just want to demo Sandpolis, try connecting to the official demo server
+(`demo.sandpolis.com`) with the desktop client. You'll be able to look around at
+simulated systems, but won't be able to add your own agents.
 
-There are several different ways to install the server. The universal installer will work on just about every system, but a specialized distribution package may be a more convenient option if your system supports it.
+Otherwise, if you want to run your own Sandpolis network, the first thing you need
+is a private server instance.
 
-### With the universal installer GUI
+## Deploying the Server
+There are several different ways to install the server. The universal installer
+is a user-friendly method that will work on just about every system, but a specialized
+distribution package or Docker container is the most convenient option for keeping
+the server updated.
 
-- <a href="https://sandpolis.com/download" target="_blank">Download</a> the universal installer for your operating system.
+### With Docker
+The server can be run as a Docker container with the following command:
+``` sh
+docker run \
+	--name sandpolis-server \
+	--restart unless-stopped \
+	-p 8678:8678 \
+	sandpolis/server:latest
+```
 
 !!! note
-	Although the server runs on any platform, it's extremely convenient to manage the server process with `systemctl` on Linux.
+	If your instance isn't starting on boot, ensure the Docker daemon is configured to start automatically:
+	``` sh
+	sudo systemctl enable docker
+	```
 
-- Select **server** from the available components and choose "install".
+The default admin password will be printed in the container's log which can be
+viewed with the following command:
+
+```sh
+docker logs sandpolis-server
+```
 
 ### With a distribution package
 #### Pacman (Arch Linux)
@@ -39,39 +62,30 @@ sudo systemctl start sandpolisd.service
 sudo systemctl enable sandpolisd.service
 ```
 
-### With Docker
-The server can also be run as a Docker container with the following command:
-``` sh
-sudo docker run --restart unless-stopped sandpolis/sandpolis-server:latest
-```
+### With the universal installer GUI
+- <a href="https://sandpolis.com/download" target="_blank">Download</a> the universal installer for your operating system.
 
-If your container isn't starting on boot, ensure the Docker daemon is configured to start automatically:
-``` sh
-sudo systemctl enable docker
-```
+!!! note
+	Although the server runs on any platform, it's extremely convenient to manage the server process with `systemctl` on Linux.
+
+- Select **server** from the available components and choose "install".
+
 
 ## Installing a Client
-There are several official client applications that can be used to connect to a server. Not all of them have the same capabilities, so choose the variant that meets your needs.
-
-### Sandpolis for iOS
-The Sandpolis iOS application can be installed from the App Store and supports iPhone and iPad devices running iOS 13.0 or greater.
-
-!!! warning
-	The iOS app optionally uses Google's [Firebase platform](https://firebase.google.com) for user authentication. If you want to avoid Google's tracking, just login to your servers manually without creating an account.
-
-#### Create an account
-Your account allows you to save multiple servers for easy access and enables several features not possible with other client applications.
-
-### Sandpolis Android application
-Coming soon...
+There are several official client applications that can be used to connect to a
+server. Not all of them have the same capabilities, so choose the variant that
+meets your needs best.
 
 ### Sandpolis Desktop Client
-Coming soon...
+
+### Sandpolis for iOS
+The [Sandpolis iOS application](https://apps.apple.com/us/app/sandpolis/id1478068506) can be installed from the App Store and supports
+iPhone and iPad devices running iOS 13.0 or greater.
 
 ## Installing the Agent
+Once you're logged into a server, the last thing to do is install an agent. As
+with clients, there are several choices that are suitable in different environments.
 
-### With the universal installer GUI
-If you have the mobile application, you can scan the QR code in the universal installer to automatically associate the agent with the correct server.
-
-### Generate an agent installer
-The desktop client can generate customized installers that can be used to install the agent on any machine.
+### Standard Agent
+### Native Agent
+### Minimal Agent
