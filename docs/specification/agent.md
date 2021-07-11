@@ -72,3 +72,5 @@ Disadvantages
 If the agent is connected to a server, it can be upgraded remotely. This will cause
 the server to fetch the agent configuration, generate a new installer, and transfer
 it to the agent. The agent then executes the new installer and terminates.
+
+### Container Resident

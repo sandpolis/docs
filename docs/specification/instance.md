@@ -17,18 +17,26 @@ The ST tree is composed of two components: `Attribute`s and `Document`s.
 Attributes contain data of a specific type and meaning. All data in the ST tree is
 stored in attributes.
 
+##### Retention
 The history of an attribute can optionally be recorded with _tracked attributes_.
+
+##### AttributeChangedEvent
 
 #### Documents
 Documents are a set of attributes and sub-documents.
+
+##### DocumentAddedEvent
+Indicates that a document has been added to the tree. No futher events will be
+fired for all children of the added document as a direct result of the addition.
+
+##### DocumentRemovedEvent
+Indicates that a document has been removed from the tree.
 
 #### Entanglement
 A concept that exists at the ST layer is **entanglement**: ST trees that reside
 on remote instances can synchronize their state. The relation can be bidirectional
 or unidirectional and last as long as necessary. All changes to the source of an
 entanglement pair will be propagated to the destination in real-time.
-
-#### Change Events
 
 #### Snapshots and Merging
 

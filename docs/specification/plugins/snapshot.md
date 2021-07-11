@@ -3,8 +3,8 @@ The snapshot plugin gives agents the ability to take and apply snapshots, even
 on filesystems that don't natively support snapshots.
 
 ## Block-based snapshots
-The target device is divided into blocks of a configurable size. Each block has
-a corresponding block hash which is the murmur3 128-bit hash 
+The target device is divided into blocks of variable size (power of 2 only). Each
+block has a corresponding block hash which is the murmur3 128-bit hash of its content.
 
 ## File-based snapshots
 
@@ -57,7 +57,6 @@ a write queue to be written to the device.
 // Destination:  Server, Agent
 ```
 
-#### Message Format
 | Field            | Type       | Requirements              | Description                                              |
 |------------------|------------|---------------------------|----------------------------------------------------------|
 | offset           | int64      |                           | The block's offset                                       |
@@ -72,8 +71,15 @@ a write queue to be written to the device.
 // Destination:  Server, Agent
 ```
 
-#### Message Format
 | Field            | Type       | Requirements              | Description                                              |
 |------------------|------------|---------------------------|----------------------------------------------------------|
 | offset           | int64      |                           | The offset of the block that the first hash corresponds  |
 | hash             | repeated bytes |                       | A list of block hashes                                   |
+
+## Permissions list
+
+| Permission                   | Description                                                                                              |
+|------------------------------|----------------------------------------------------------------------------------------------------------|
+| `agent.snapshot.create`      | Rights create new snapshots of agent disks                                                               |
+| `agent.snapshot.apply`       | Rights apply existing snapshots to agent disks                                                           |
+| `server.snapshot.list`       | Rights to list existing snapshots stored by the server                                                   |

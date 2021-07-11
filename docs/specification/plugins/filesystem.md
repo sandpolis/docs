@@ -14,3 +14,14 @@ client's machine.
 
 ### Client mount
 A client's filesystem may be mounted to a mountpoint on an agent's machine.
+
+## Permissions list
+
+| Permission                   | Description                                                                                              |
+|------------------------------|----------------------------------------------------------------------------------------------------------|
+| `agent.fs.mount`             | Rights to mount an agent's filesystem                                                                    |
+| `agent.fs.read`              | Rights to read an agent's filesystem                                                                     |
+| `agent.fs.write`             | Rights to write an agent's filesystem                                                                    |
+| `client.fs.mount`            | Rights to mount the current client's filesystem                                                          |
+| `client.fs.read`             | Rights to read the current client's filesystem                                                           |
+| `client.fs.write`            | Rights to write the current client's filesystem                                                          |

@@ -87,5 +87,56 @@ Once you're logged into a server, the last thing to do is install an agent. As
 with clients, there are several choices that are suitable in different environments.
 
 ### Standard Agent
+The standard agent has the most features and highest performance impact. It runs
+on the JVM and is multi-platform.
+
 ### Native Agent
+The native agent has fewer features and a much smaller resource requirement. It's
+platform-specific.
+
 ### Minimal Agent
+The minimal agent has no external dependencies and is designed to run on highly
+resource constrained platforms.
+
+### Deployment Types
+In addition to different agent types, there are a few different ways each can be
+deployed.
+
+#### Standard Deploy
+The typical way to deploy an agent is by installing it with your platform's package
+manager and configuring it on first run. When prompted, enter the server's address,
+an optional password, and an optional time-based alphanumeric token provided in
+the client's user interface.
+
+!!! note
+	This deployment method is not available for the minimal agent.
+
+##### Container Resident
+All agent types can also be deployed as Docker containers. For example:
+
+```sh
+docker run \
+	--name sandpolis-agent \
+	--restart unless-stopped \
+	-v /:/host:ro \
+	sandpolis/agent
+```
+
+This mounts the host's filesystem into the container with read-only permissions
+which is the most common usage.
+
+#### SSH Deploy
+The SSH deploy is most convenient if your systems are already running SSH servers.
+After entering an IP address, username, and password (or keyfile), an agent will
+be generated and transferred via SSH.
+
+!!! note
+	This deployment method supports all agent types and compatible platforms.
+
+#### Manual Deploy
+An installer executable can be generated and manually installed on systems. This
+approach has the disadvantage that installers are not cryptographically signed and
+it requires the most manual intervention.
+
+!!! note
+	This deployment method supports all agent types and compatible platforms.

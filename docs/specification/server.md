@@ -43,29 +43,23 @@ and consequently are allowed to do almost nothing.
 | Permission                   | Description                                                                                              |
 |------------------------------|----------------------------------------------------------------------------------------------------------|
 | `server.generate`            | Rights to use the generator                                                                              |
-| `server.fs.read`             | Read access to the server's filesystem                                                                   |
-| `server.fs.write`            | Write access to the server's filesystem                                                                  |
-| `server.users.view`          | Right to view usernames and permissions of all other users                                               |
+| `server.users.list`          | Right to view usernames and permissions of all other users                                               |
 | `server.users.create`        | Right to create new users (of lesser or equal permissions)                                               |
-| `server.state.stop`          | Right to stop the server                                                                                 |
-| `server.state.shutdown`      | Right to shutdown the server                                                                             |
-| `server.state.restart`       | Right to restart the server                                                                              |
 | `server.net.view`            | Right to open the network control panel                                                                  |
-| `server.net.create_listener` | Right to create a new listener on the server                                                             |
-| `server.auth.create_group`   | Right to create a new authentication group on the server                                                 |
-| `agent.fs.read`              | Read access to the agent's filesystem                                                                    |
-| `agent.fs.write`             | Write access to the agent's filesystem                                                                   |
-| `agent.state.shutdown`       | Right to shutdown the agent                                                                              |
-| `agent.state.restart`        | Right to restart the agent                                                                               |
+| `server.listener.create`     | Right to create a new listener on the server                                                             |
+| `server.listener.list`       | Right to view all listeners on the server                                                                |
+| `server.group.create`        | Right to create a new authentication group on the server                                                 |
+| `server.group.list`          | Right to view all authentication groups on the server                                                    |
+| `agent.system.power`         | Right to shutdown, reboot, etc the agent                                                                 |
 
 ## Authentication Groups
 Authentication groups are sets of agents that share a common authentication scheme.
-Every group has exactly one owner and zero or more client members.
+Every group has exactly one owner and zero or more (user) members.
 
 ### Password Authentication
 ### Certificate Authentication
 
-## Generators
+## Agent Generators
 A `Generator` is a routine which produces some installation artifact according
 to the parameters set out in an authentication group. The installation artifact
 can then be used to install an agent on a remote system.
@@ -74,11 +68,27 @@ can then be used to install an agent on a remote system.
 - Native agent (com.sandpolis.agent.micro)
 - Minimal agent (com.sandpolis.agent.nano)
 
-### Installation Artifacts
-At minimum, installation artifacts contain configuration and settings for the agent. Usually, installation artifacts will also contain the actual agent code and be runnable on the remote system.
+### Installers
+On execution, installers set up the agent base directory according to its configuration
+and executes the agent. If the target directory already contains an installation,
+the old installation is entirely overwritten.
 
-#### Installers
-Upon execution, the installer sets up the base directory according to its configuration and executes the agent. If the target directory already contains an installation, the old installation is entirely overwritten.
-	
-#### Tokens
-A token is an artifact which only contains the agent configuration and cannot be executed by itself. When provided to a generic installer, the token allows the agent to be installed on the remote system.
+#### Installer Configuration
+| Property                     | Description                                                                                              |
+|------------------------------|----------------------------------------------------------------------------------------------------------|
+| `agent.type`                 | The agent type                                                                                           |
+| `agent.path`                 | The filesystem path                                                                                      |
+| `installer.recover`          | Whether the installation should attempt to continue if errors occur                                      |
+
+### Packager
+A packager is responsible for creating an agent installer binary according to the
+parameters set out in an authentication group.
+
+### Deployer
+A deployer is responsible for deploying generated agent installers to remote
+systems automatically.
+
+#### SSH Deployer
+The SSH deployer first determines the remote system type and invokes an appropriate
+packager to generate an installer. The installer is then transferred to the remote
+host and executed.
