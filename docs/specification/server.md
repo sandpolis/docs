@@ -23,6 +23,15 @@ The following public geolocation services are supported:
 | <a href="https://ip-api.com" target="_blank">ip-api.com</a> | `ip-api.com` |
 | <a href="https://tools.keycdn.com/geo" target="_blank">tools.keycdn.com</a> | `keycdn.com` |
 
+## Database
+
+| Property                        | Default      | Description                                                                            |
+|---------------------------------|--------------|----------------------------------------------------------------------------------------|
+| `s7s.storage.provider`          | *ephemeral*  | The storage provider to use
+| `s7s.storage.mongodb.host`      |              | The address of the mongodb host                                                        |
+| `s7s.storage.mongodb.username`  |              | The mongodb user's username                                                            |
+| `s7s.storage.mongodb.password`  |              | The mongodb user's password                                                            |
+
 ## First Start
 If the server starts with ephemeral storage or an empty database, the server enters
 "first start" mode. This mode has the following implications:

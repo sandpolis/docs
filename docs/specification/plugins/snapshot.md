@@ -83,3 +83,10 @@ a write queue to be written to the device.
 | `agent.snapshot.create`      | Rights create new snapshots of agent disks                                                               |
 | `agent.snapshot.apply`       | Rights apply existing snapshots to agent disks                                                           |
 | `server.snapshot.list`       | Rights to list existing snapshots stored by the server                                                   |
+
+## Configuration
+
+| Property                        | Default      | Description                                                                            |
+|---------------------------------|--------------|----------------------------------------------------------------------------------------|
+| `s7s.snapshot.storage.provider` | *filesystem* | The storage provider to use                                                            |
+| `s7s.snapshot.storage.filesystem.path` |       | The filesystem path                                                                    | 
