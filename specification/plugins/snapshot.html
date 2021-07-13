@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Snapshot Plugin - Sandpolis Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Snapshot Plugin";
+    var mkdocs_page_input_path = "specification/plugins/snapshot.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="icon icon-home"> Sandpolis Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/client/gui.html">Using the desktop client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../tutorials/client/terminal.html">Using the terminal client</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Specification</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../instance.html">Instance</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../agent.html">Agent</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../server.html">Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../clientserver.html">Client/Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../serveragent.html">Server/Agent</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Plugins</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="device.html">Device Plugin</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="filesystem.html">Filesystem Plugin</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="snapshot.html">Snapshot Plugin</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#block-based-snapshots">Block-based snapshots</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#file-based-snapshots">File-based snapshots</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#server">Server</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#snapshot-format">Snapshot format</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#agent">Agent</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#bootagent">Bootagent</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#snapshot-messages">Snapshot Messages</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ev_snapshotdatablock">EV_SnapshotDataBlock</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ev_snapshothashblock">EV_SnapshotHashBlock</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#permissions-list">Permissions list</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation Reference</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/client.html">Client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/server.html">Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/agent.html">Agent</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../application/network.html">Networking</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Sandpolis Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Plugins &raquo;</li>
+        
+      
+        
+          <li>Specification &raquo;</li>
+        
+      
+    
+    <li>Snapshot Plugin</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="snapshot-plugin">Snapshot Plugin</h1>
+<p>The snapshot plugin gives agents the ability to take and apply snapshots, even
+on filesystems that don't natively support snapshots.</p>
+<h2 id="block-based-snapshots">Block-based snapshots</h2>
+<p>The target device is divided into blocks of variable size (power of 2 only). Each
+block has a corresponding block hash which is the murmur3 128-bit hash of its content.</p>
+<h2 id="file-based-snapshots">File-based snapshots</h2>
+<h2 id="server">Server</h2>
+<p>The server is responsible for storing snapshot data and uploading/downloading it
+to/from agents.</p>
+<h3 id="snapshot-format">Snapshot format</h3>
+<p>Snapshot contents are stored in QEMU qcow2 files on the server. This format is
+mature and supports useful features like compression and encryption.</p>
+<h2 id="agent">Agent</h2>
+<h3 id="bootagent">Bootagent</h3>
+<p>A bootagent is responsible for reading/writing the actual data to/from the agent's
+disks.</p>
+<h4 id="residency">Residency</h4>
+<p>The bootagent runs in a minimized Alpine Linux environment.</p>
+<h4 id="create-snapshot">Create Snapshot</h4>
+<p>If there exist no previous snapshots, the bootagent first determines the appropriate
+block size for the disk. The agent may take into account the size of the disk or
+the erase-block size of an SSD, but the block size must be a power of two.</p>
+<p>If allowed, the agent will wipe the disk's free space before continuing. This can
+significantly decrease the size of the resulting snapshot because empty blocks are
+omitted.</p>
+<p>If there exists a previous snapshot for the disk, the agent receives a stream of
+block hashes. A single worker thread reads blocks from the disk and compares their hashes
+against the block hashes retrieved from the server. If the hashes do not match,
+the block is passed into a send queue to be egressed to the server.</p>
+<h4 id="apply-snapshot">Apply Snapshot</h4>
+<p>If there exists a previous snapshot for the disk, the agent initiates a stream of
+block hashes. A single worker thread reads blocks from the disk and passes their
+hashes into a send queue to be egressed to the server.</p>
+<p>Simultaneously, the agent receives a stream of block data which are placed into
+a write queue to be written to the device.</p>
+<h2 id="snapshot-messages">Snapshot Messages</h2>
+<h3 id="ev_snapshotdatablock">EV_SnapshotDataBlock</h3>
+<pre><code class="language-java">// Contains snapshot data.
+//
+// Source:       Server, Agent
+// Destination:  Server, Agent
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Requirements</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>offset</td>
+<td>int64</td>
+<td></td>
+<td>The block's offset</td>
+</tr>
+<tr>
+<td>data</td>
+<td>bytes</td>
+<td></td>
+<td>The block's contents compressed with zlib</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ev_snapshothashblock">EV_SnapshotHashBlock</h3>
+<pre><code class="language-java">// Contains a list of contiguous snapshot hashes.
+//
+// Source:       Server, Agent
+// Destination:  Server, Agent
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Requirements</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>offset</td>
+<td>int64</td>
+<td></td>
+<td>The offset of the block that the first hash corresponds</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>repeated bytes</td>
+<td></td>
+<td>A list of block hashes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="permissions-list">Permissions list</h2>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent.snapshot.create</code></td>
+<td>Rights create new snapshots of agent disks</td>
+</tr>
+<tr>
+<td><code>agent.snapshot.apply</code></td>
+<td>Rights apply existing snapshots to agent disks</td>
+</tr>
+<tr>
+<td><code>server.snapshot.list</code></td>
+<td>Rights to list existing snapshots stored by the server</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuration">Configuration</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s7s.snapshot.storage.provider</code></td>
+<td><em>filesystem</em></td>
+<td>The storage provider to use</td>
+</tr>
+<tr>
+<td><code>s7s.snapshot.storage.filesystem.path</code></td>
+<td></td>
+<td>The filesystem path</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../application/client.html" class="btn btn-neutral float-right" title="Client">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="filesystem.html" class="btn btn-neutral" title="Filesystem Plugin"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="filesystem.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../application/client.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

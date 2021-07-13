@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Server - Sandpolis Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Server";
+    var mkdocs_page_input_path = "specification/server.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> Sandpolis Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../tutorials/getting_started.html">Getting Started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../tutorials/client/gui.html">Using the desktop client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../tutorials/client/terminal.html">Using the terminal client</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Specification</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="instance.html">Instance</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="agent.html">Agent</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="server.html">Server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#listening-port">Listening port</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#geolocation-services">Geolocation Services</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#database">Database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#first-start">First Start</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#default-admin-password">Default admin password</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connection-blocking">Connection Blocking</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#permissions">Permissions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#permissions-list">Permissions list</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#agent-groups">Agent Groups</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#password-authentication-scheme">Password Authentication Scheme</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#token-authentication-scheme">Token Authentication Scheme</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#certificate-authentication-scheme">Certificate Authentication Scheme</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#agent-certificate-expiration">Agent Certificate Expiration</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#agent-certificate-renewal">Agent Certificate Renewal</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#agent-generators">Agent Generators</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installers">Installers</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#installer-configuration">Installer Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#packager">Packager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deployer">Deployer</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ssh-deployer">SSH Deployer</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="clientserver.html">Client/Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="serveragent.html">Server/Agent</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Plugins</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="plugins/device.html">Device Plugin</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="plugins/filesystem.html">Filesystem Plugin</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="plugins/snapshot.html">Snapshot Plugin</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation Reference</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../application/client.html">Client</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../application/server.html">Server</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../application/agent.html">Agent</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../application/network.html">Networking</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Sandpolis Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Specification &raquo;</li>
+        
+      
+    
+    <li>Server</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="server-instance">Server Instance</h1>
+<p>Every Sandpolis network must include one server instance at minimum. Servers are
+responsible for coordinating interactions among instances and persisting data.</p>
+<h2 id="listening-port">Listening port</h2>
+<p>The Sandpolis server listens on TCP port <strong>8768</strong> by default, but can be configured
+to listen on a different port or multiple ports concurrently.</p>
+<h2 id="geolocation-services">Geolocation Services</h2>
+<p>Sandpolis is able to get its location information from several sources. To select
+a location service, the following configuration options are recognized:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server.geolocation.service</code></td>
+<td><em>ip-api.com</em></td>
+<td>The name of the geolocation service to use. Valid values are found in the table below.</td>
+</tr>
+<tr>
+<td><code>server.geolocation.key</code></td>
+<td><em>null</em></td>
+<td>The service API key</td>
+</tr>
+<tr>
+<td><code>server.geolocation.expiration</code></td>
+<td><em>240</em></td>
+<td>The cache timeout in hours</td>
+</tr>
+</tbody>
+</table>
+<p>The following public geolocation services are supported:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Identifier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://ip-api.com" target="_blank">ip-api.com</a></td>
+<td><code>ip-api.com</code></td>
+</tr>
+<tr>
+<td><a href="https://tools.keycdn.com/geo" target="_blank">tools.keycdn.com</a></td>
+<td><code>keycdn.com</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="database">Database</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s7s.storage.provider</code></td>
+<td><em>ephemeral</em></td>
+<td>The database storage provider</td>
+</tr>
+<tr>
+<td><code>s7s.storage.mongodb.host</code></td>
+<td></td>
+<td>The address of the mongodb host</td>
+</tr>
+<tr>
+<td><code>s7s.storage.mongodb.username</code></td>
+<td></td>
+<td>The mongodb user's username</td>
+</tr>
+<tr>
+<td><code>s7s.storage.mongodb.password</code></td>
+<td></td>
+<td>The mongodb user's password</td>
+</tr>
+</tbody>
+</table>
+<h2 id="first-start">First Start</h2>
+<p>If the server starts with ephemeral storage or an empty database, the server enters
+"first start" mode. This mode has the following implications:</p>
+<h3 id="default-admin-password">Default admin password</h3>
+<p>The admin password will be randomized and printed in the server log. All clients
+are required to force users to change the admin password and setup multi-factor
+authentication before proceeding after the first login.</p>
+<h2 id="connection-blocking">Connection Blocking</h2>
+<p>The server will refuse connections from IP addresses on a configurable blocklist
+or those that trigger the global rate-limiting policy.</p>
+<p>IP address on a configurable whitelist are exempt from rate-limiting.</p>
+<h2 id="permissions">Permissions</h2>
+<p>All user accounts are subject to a set of permissions controlling what server
+operations are authorized. The inital admin user has complete and irrevocable
+permissions. By default, additional user accounts are created without permissions
+and consequently are allowed to do almost nothing.</p>
+<h3 id="permissions-list">Permissions list</h3>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server.generate</code></td>
+<td>Rights to use the generator</td>
+</tr>
+<tr>
+<td><code>server.users.list</code></td>
+<td>Right to view usernames and permissions of all other users</td>
+</tr>
+<tr>
+<td><code>server.users.create</code></td>
+<td>Right to create new users (of lesser or equal permissions)</td>
+</tr>
+<tr>
+<td><code>server.net.view</code></td>
+<td>Right to open the network control panel</td>
+</tr>
+<tr>
+<td><code>server.listener.create</code></td>
+<td>Right to create a new listener on the server</td>
+</tr>
+<tr>
+<td><code>server.listener.list</code></td>
+<td>Right to view all listeners on the server</td>
+</tr>
+<tr>
+<td><code>server.group.create</code></td>
+<td>Right to create a new authentication group on the server</td>
+</tr>
+<tr>
+<td><code>server.group.list</code></td>
+<td>Right to view all authentication groups on the server</td>
+</tr>
+<tr>
+<td><code>agent.system.power</code></td>
+<td>Right to shutdown, reboot, etc the agent</td>
+</tr>
+</tbody>
+</table>
+<h2 id="agent-groups">Agent Groups</h2>
+<p>Agent groups are sets of agents that share one or more authentication schemes.
+Every group has exactly one owner and zero or more (user) members.</p>
+<h3 id="password-authentication-scheme">Password Authentication Scheme</h3>
+<p>After establishing a connection, agents may present an unsalted SHA512 hash of
+a password entered by the user to the server. The server compares the password
+to each agent group until it finds a match. If a match is found, the agent is
+becomes authenticated to the matching agent group. Otherwise, the connection is
+closed if more than 5 attempts were made on that connection.</p>
+<p>Since a user must type the password manually, the server will attempt to configure
+the certificate authentication scheme for all subsequent connections.</p>
+<h3 id="token-authentication-scheme">Token Authentication Scheme</h3>
+<p>The agent may provide an 8 character alphanumeric time-based token periodically
+generated by the server from an agent group's secret key. Since a user must type
+the token in manually, the server will attempt to configure the certificate authentication
+scheme for all subsequent connections.</p>
+<h3 id="certificate-authentication-scheme">Certificate Authentication Scheme</h3>
+<p>The agent may provide an X509 "client" certificate signed by an agent group's secret
+key during the initial connection attempt. If the agent certificate was found to
+be valid, the connection is automatically authenticated without any additional
+message exchanges.</p>
+<h4 id="agent-certificate-expiration">Agent Certificate Expiration</h4>
+<p>The default lifetime for an agent certificate is six months. The following section
+implies an agent must connect to a server at least once every 1.5 months otherwise
+it loses its ability to authenticate.</p>
+<h4 id="agent-certificate-renewal">Agent Certificate Renewal</h4>
+<p>Once 75% of the lifetime of an agent certificate elapses, the server attempts to
+issue a new certificate and installs it on the agent.</p>
+<h2 id="agent-generators">Agent Generators</h2>
+<p>A <code>Generator</code> is a routine which produces some installation artifact according
+to the parameters set out in an authentication group. The installation artifact
+can then be used to install an agent on a remote system.</p>
+<ul>
+<li>Standard agent (com.sandpolis.agent.vanilla)</li>
+<li>Native agent (com.sandpolis.agent.micro)</li>
+<li>Minimal agent (com.sandpolis.agent.nano)</li>
+</ul>
+<h3 id="installers">Installers</h3>
+<p>On execution, installers set up the agent base directory according to its configuration
+and executes the agent. If the target directory already contains an installation,
+the old installation is entirely overwritten.</p>
+<h4 id="installer-configuration">Installer Configuration</h4>
+<p>Installers have an embedded configuration file called <code>install.properties</code> that
+describes how the installation process should proceed.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent.type</code></td>
+<td>The agent type (vanilla, micro, or nano)</td>
+</tr>
+<tr>
+<td><code>agent.path</code></td>
+<td>The filesystem path</td>
+</tr>
+<tr>
+<td><code>agent.auth.scheme</code></td>
+<td>The name of the authentication scheme to use (password or certificate)</td>
+</tr>
+<tr>
+<td><code>install.recover</code></td>
+<td>Whether the installation should attempt to continue if errors occur</td>
+</tr>
+</tbody>
+</table>
+<h3 id="packager">Packager</h3>
+<p>A packager is responsible for creating an agent installer binary according to the
+parameters set out in an authentication group.</p>
+<h3 id="deployer">Deployer</h3>
+<p>A deployer is responsible for deploying generated agent installers to remote
+systems automatically.</p>
+<h4 id="ssh-deployer">SSH Deployer</h4>
+<p>The SSH deployer first determines the remote system type and invokes an appropriate
+packager to generate an installer. The installer is then transferred to the remote
+host and executed.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="clientserver.html" class="btn btn-neutral float-right" title="Client/Server">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="agent.html" class="btn btn-neutral" title="Agent"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="agent.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="clientserver.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
